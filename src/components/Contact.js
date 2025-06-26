@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 
 function Contact({ contact }) {
-    console.log("contact : ");
-    console.log(contact);
     return (
         <Link to={`/contacts/${contact.id}`} href="#id" className="contact__item">
             <div className="contact__header">
@@ -10,7 +8,7 @@ function Contact({ contact }) {
                     <img src={contact.photoUrl} alt={contact.nom}/>
                 </div>
                 <div className="contact__details">
-                    <p className="contact_name"> {contact.nom} { contact.nom }</p>
+                    <p className="contact_name"> {contact.nom}</p>
                 </div>
             </div>
             <div className="contact__body">

@@ -5,8 +5,6 @@ function ContactList({ data, currentPage, getAllContacts }){
         {data?.content?.length === 0 && <div>Aucun Contact</div>}
 
         <ul className="contact__list">
-            {console.log("donneés :")}
-            {console.log(data)}
 
             {data?.content?.length > 0 && data.content.map(contact => <Contact contact={contact} key={contact.id}></Contact>)}
             

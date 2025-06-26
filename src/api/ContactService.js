@@ -2,7 +2,7 @@ import axios from "axios"
 
 const URL_API = "http://localhost:8080/contacts"
 
-export async function saveContact(contact) {
+export async function postSaveContact(contact) {
     return await axios.post(URL_API, contact);
 }
 
