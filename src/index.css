@@ -425,6 +425,7 @@ i {
 
 /* Modal */
 .modal {
+  overflow: auto;
   position: fixed !important;
   top: 45%;
   left: 50%;
