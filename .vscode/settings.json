@@ -1,0 +1,22 @@
+{
+    "workbench.colorCustomizations": {
+        "[Monokai]": {
+            "editor.background": "#000000",
+            "toolbar.activeBackground": "#000000",
+            "textCodeBlock.background": "#000000",
+            "sideBar.background": "#000000",
+            "editorGroupHeader.tabsBackground": "#131313",
+            "minimap.background": "#000000",
+            "minimapSlider.background": "#000000",
+            "searchEditor.findMatchBackground": "#000000",
+            "sideBarSectionHeader.background": "#000000",
+            "activityBar.activeBackground": "#000000",
+            "activityBar.background": "#131313",
+            "input.background": "#000000",
+            "editor.findMatchBackground": "#1d8325",
+            "editorGutter.background": "#000000",
+            "peekViewEditor.background": "#0f0f0f",
+            "peekView.border": "#ffffff"
+        }
+    }
+}

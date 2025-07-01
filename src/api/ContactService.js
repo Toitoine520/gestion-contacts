@@ -6,10 +6,15 @@ export async function postSaveContact(contact) {
     return await axios.post(URL_API, contact);
 }
 
-export async function getContacts(page = 0, size = 10) {
-    return await axios.get(`${URL_API}?page=${page}&size=${size}`);
+export async function getContacts(page = 0, size = 9) {
+  return await axios.get(`${URL_API}?page=${page}&size=${size}`);
 }
 
+/**
+ * Requète à l'API pou récupérer l'utilisateur
+ * @param {id} id identifiant créé par défaut à la création dans la bdd
+ * @returns Retourne l'utilisateur avec l'identifiant donné
+ */
 export async function getContactById(id) {
     return await axios.get(`${URL_API}/${id}`);
 }

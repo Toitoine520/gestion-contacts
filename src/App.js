@@ -10,19 +10,20 @@ import {
   updatePhoto,
 } from "./api/ContactService";
 import { Navigate, Route, Routes } from "react-router-dom";
+import ContactDetails from "./components/ContactDetails";
 
 function App() {
   //popup formulaire
   const modalRef = useRef();
   // ref de la photo chargée
-  const fileRef = useRef();
+  const photoRef = useRef();
   // données contacts
   const [data, setData] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   /**
    *  photo chargée
    * */
-  const [file, setFile] = useState(undefined);
+  const [photo, setPhoto] = useState(undefined);
   //template utilisateur vide
   const [valeursContact, setValeursContact] = useState({
     nom: "",
@@ -32,7 +33,7 @@ function App() {
     status: "",
   });
 
-  const getAllContacts = async (page = 0, size = 10) => {
+  const getAllContacts = async (page = 0, size = 9) => {
     try {
       setCurrentPage(page);
       const { data: dataUsers } = await getContacts(page, size);
@@ -59,6 +60,9 @@ function App() {
     getAllContacts();
   }, []);
 
+  async function updateContact() {}
+  async function updateImage() {}
+
   /**
    * Enregistrement d'un nouveau contact
    *
@@ -69,12 +73,9 @@ function App() {
     try {
       const contactSauvegardé = await postSaveContact(valeursContact);
       const formData = new FormData();
-      formData.append("fichierImage", file, file.name);
+      formData.append("fichierImage", photo, photo.name);
       formData.append("id", contactSauvegardé.data.id);
-      console.log("idUser : " + contactSauvegardé.data.id);
-      console.log(contactSauvegardé);
       const { data: photoUrl } = await updatePhoto(formData); // Photo ajoutée au contact
-      console.log(photoUrl);
 
       toggleModal(false);
       // Reset des champs
@@ -85,8 +86,8 @@ function App() {
         pays: "",
         status: "",
       });
-      setFile(undefined);
-      fileRef.current.value = null;
+      setPhoto(undefined);
+      photoRef.current.value = null;
       // rafraichissement
       getAllContacts();
     } catch (error) {
@@ -101,6 +102,7 @@ function App() {
         <Header toggleModal={toggleModal} nbDeContacts={data.totalElements} />
         <Routes>
           <Route path="/" element={<Navigate to="/contacts" />}></Route>
+          {/* Liste contacts */}
           <Route
             path="/contacts"
             element={
@@ -110,7 +112,17 @@ function App() {
                 getAllContacts={getAllContacts}
               />
             }
-          />
+          ></Route>
+          {/* Détails contact */}
+          <Route
+            path="/contacts/:id"
+            element={
+              <ContactDetails
+                updateContact={updateContact}
+                updateImage={updateImage}
+              ></ContactDetails>
+            }
+          ></Route>
         </Routes>
       </div>
 
@@ -118,9 +130,7 @@ function App() {
       <dialog ref={modalRef} className="modal" id="modal">
         <div className="modal__header">
           <h3>New Contact</h3>
-          <i onClick={() => toggleModal(false)} className="bi bi-x-lg">
-            X
-          </i>
+          <i onClick={() => toggleModal(false)}>X</i>
         </div>
         <div className="divider"></div>
         <div className="modal__body">
@@ -149,7 +159,7 @@ function App() {
               <div className="input-box">
                 <span className="details">Téléphone</span>
                 <input
-                  type="text"
+                  type="number"
                   value={valeursContact.phone}
                   onChange={onChange}
                   name="telephone"
@@ -182,8 +192,8 @@ function App() {
                 <input
                   type="file"
                   accept=".png, .jpeg, .jpg"
-                  onChange={(event) => setFile(event.target.files[0])}
-                  ref={fileRef}
+                  onChange={(event) => setPhoto(event.target.files[0])}
+                  ref={photoRef}
                   required
                 />
               </div>

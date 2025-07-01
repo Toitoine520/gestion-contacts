@@ -1,3 +1,7 @@
+/* Tailwindcss */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* GLOBAL VARIABLES */
 :root {
   --selective-blue: hsl(210, 69%, 25%);
